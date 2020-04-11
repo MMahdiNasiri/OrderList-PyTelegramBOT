@@ -13,5 +13,6 @@ myDict = {
 file = open("newfile.txt", "a+")
 text = f'{file.read()} wow'
 file.write(str(myDict))
-print(text)
+
 file.close()
+print(text)
