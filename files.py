@@ -10,9 +10,9 @@ myDict = {
 }
 
 
-file = open("newfile.txt", "a+")
-text = f'{file.read()} wow'
-file.write(str(myDict))
+file = open("newfile.txt", "r+")
+text = f'{file.readline()} wow'
+file.write(f'{str(myDict)}\n')
 
 file.close()
 print(text)
