@@ -21,7 +21,6 @@ class orders:
 
 
 
-
 def productkeyboard():
     proditem = {}
     markup = types.ReplyKeyboardMarkup()
@@ -39,7 +38,7 @@ def numberkeyboard():
     for x in range(13):
         numbers[x] = types.KeyboardButton(str(x))
     backItem = types.KeyboardButton('back')
-    for x in range(1,13,3):
+    for x in range(1,12,3):
         markup.row(numbers[x], numbers[x+1], numbers[x+2])
     markup.row(backItem)
     return markup
