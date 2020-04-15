@@ -37,7 +37,9 @@ def numberkeyboard():
     markup = types.ReplyKeyboardMarkup(row_width=3)
     for x in range(13):
         numbers[x] = types.KeyboardButton(str(x))
-    backItem = types.KeyboardButton('back')
+
+    markup.add(numbers[1], numbers[2], numbers[3], numbers[4], numbers[5], numbers[6])
+    # backItem = types.KeyboardButton('back')
     # try:
     #     for x in range(1,12,3):
     #         markup.row(numbers[x], numbers[x+1], numbers[x+2])
