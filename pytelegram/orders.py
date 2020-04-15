@@ -33,13 +33,13 @@ def productkeyboard():
     return markup
 
 def numberkeyboard():
-    numbers = {}
+    numbers = []
     markup = types.ReplyKeyboardMarkup(row_width=3)
     for x in range(13):
-        numbers[x] = types.KeyboardButton(str(x))
+        numbers.append(types.KeyboardButton(str(x)))
 
-    markup.add(numbers[1], numbers[2], numbers[3], numbers[4], numbers[5])
-    markup.add(numbers[6], numbers[7])
+    markup.add(*numbers)
+
     backItem = types.KeyboardButton('back')
     markup.add(backItem)
     # try:
