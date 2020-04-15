@@ -42,12 +42,6 @@ def numberkeyboard():
 
     backItem = types.KeyboardButton('back')
     markup.add(backItem)
-    # try:
-    #     for x in range(1,12,3):
-    #         markup.row(numbers[x], numbers[x+1], numbers[x+2])
-    # except:
-    #     markup.row()
-    # markup.row(backItem)
     return markup
 
 
@@ -77,7 +71,7 @@ def number_order(message):
         if chat_id not in order:
             order[chat_id] = orders()
         order[chat_id].tags[reserve] = message.text
-        msg = f'your orders until now:\n{order[chat_id].tags}'
+        msg = 'your orders until now:\n{}'.format(order[chat_id].tags)
         markup = productkeyboard()
         bot.send_message(chat_id, msg, reply_markup=markup)
 
@@ -95,9 +89,9 @@ def save_order(message):
         if chat_id in order:
             msg = ""
             for product,value in order[chat_id].tags.items():
-                msg += f"{product} : {value}\n"
+                msg += "{} : {}\n".format(product, value)
             del order[chat_id]
-            bot.send_message(chat_id , f"your order is:\n{msg}you can /start again", reply_markup=markup)
+            bot.send_message(chat_id , "your order is:\n{}you can /start again".format(msg), reply_markup=markup)
 
 
 
