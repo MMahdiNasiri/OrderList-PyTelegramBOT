@@ -1,8 +1,7 @@
 import telebot
 import time
 import sys
-from telebot import types
-
+from keyboards import *
 
 bot = telebot.TeleBot(token = "1064935072:AAEs8k05qJj3sGfhwfY_4fQfVYMn1ADXDnk")
 
@@ -21,34 +20,9 @@ class orders:
 
 
 
-def productkeyboard():
-    proditem = {}
-    markup = types.ReplyKeyboardMarkup()
-    for x in range(len(product)):
-        proditem[x] = types.KeyboardButton(product[x])
-    finishitem = types.KeyboardButton('finish')
-    for x in range(0,len(product),3):
-        markup.row(proditem[x], proditem[x+1], proditem[x+2])
-    markup.row(finishitem)
-    return markup
-
-def numberkeyboard():
-    numbers = []
-    markup = types.ReplyKeyboardMarkup(row_width=3)
-    for x in range(13):
-        numbers.append(types.KeyboardButton(str(x)))
-
-    markup.add(*numbers)
-
-    backItem = types.KeyboardButton('back')
-    markup.add(backItem)
-    return markup
-
-
-
 @bot.message_handler(commands=['start', 'help'])
 def starting_message(message):
-    markup = productkeyboard()
+    markup = productkeyboard(product)
     bot.send_message(message.chat.id, 'choose product from the list', reply_markup=markup)
 
 
@@ -72,7 +46,7 @@ def number_order(message):
             order[chat_id] = orders()
         order[chat_id].tags[reserve] = message.text
         msg = 'your orders until now:\n{}'.format(order[chat_id].tags)
-        markup = productkeyboard()
+        markup = productkeyboard(product)
         bot.send_message(chat_id, msg, reply_markup=markup)
 
 
@@ -82,7 +56,7 @@ def number_order(message):
 @bot.message_handler(func=lambda message: (message.text == 'finish') or (message.text.lower()=='back'))
 def save_order(message):
     chat_id = message.chat.id
-    markup = productkeyboard()
+    markup = productkeyboard(product)
     if message.text == 'back':
         bot.send_message(chat_id , "what???", reply_markup=markup)
     if message.text == 'finish':    
@@ -105,7 +79,7 @@ def wrong_message(message):
         markup = numberkeyboard()
         bot.send_message(chat_id, 'you must enter a number!!!!', reply_markup=markup)
     else:
-        markup = productkeyboard()
+        markup = productkeyboard(product)
         bot.send_message(chat_id, "you must choose what you want first!!!", reply_markup=markup)
     
 
