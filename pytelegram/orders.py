@@ -53,21 +53,29 @@ def number_order(message):
 
 
 
-@bot.message_handler(func=lambda message: (message.text == 'finish') or (message.text.lower()=='back'))
+@bot.message_handler(func=lambda message: (message.text == 'finish'))
 def save_order(message):
     chat_id = message.chat.id
+
+    if chat_id in order:
+        msg = ""
+        for product,value in order[chat_id].tags.items():
+            msg += "{} : {}\n".format(product, value)
+        
+        del order[chat_id]
+        markup = productkeyboard(product)
+        bot.send_message(chat_id , "your order is:\n{}you can /start again".format(msg), reply_markup=markup)
+
+
+
+
+
+@bot.message_handler(func=lambda message: message.text.lower()=='back')
+def back_to_product(message):
+
+    del id_order[message.chat.id]
     markup = productkeyboard(product)
-    if message.text == 'back':
-        bot.send_message(chat_id , "what???", reply_markup=markup)
-    if message.text == 'finish':    
-        if chat_id in order:
-            msg = ""
-            for product,value in order[chat_id].tags.items():
-                msg += "{} : {}\n".format(product, value)
-            del order[chat_id]
-            bot.send_message(chat_id , "your order is:\n{}you can /start again".format(msg), reply_markup=markup)
-
-
+    bot.send_message(message.chat.id , "what???", reply_markup=markup)
 
 
 
