@@ -4,7 +4,7 @@ import telebot
 
 
 
-def productkeyboard(*product):
+def productkeyboard(product):
     proditem = []
     markup = types.ReplyKeyboardMarkup(row_width=3)
     for x in product:
