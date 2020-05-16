@@ -3,7 +3,7 @@ import time
 import sys
 from keyboards import *
 
-bot = telebot.TeleBot(token = "1064935072:AAEs8k05qJj3sGfhwfY_4fQfVYMn1ADXDnk")
+bot = telebot.TeleBot(token = "<<YOU MUST INSERT YOUR OWN TOKEN HEAR")
 
 product = ['apple', 'orange', 'cucumber', 'banana', 'strawberry', 'melon']
 id_order = dict()
